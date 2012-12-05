@@ -1,14 +1,42 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <title>Search</title>
     </head>
     <body>
-        <p>You searched for "{{ query }}"; the results are listed below.</p>
-        <ul>
-            {% for page in results %}
-            <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
-            {% endfor %}
-        </ul>
+        <form method="get" action="/search/" style="float:right">
+            <label for="id_q">Rechercher</label>
+            <input type="text" name="q" id="id_q" value="{{ query }}"/>
+            <input type="submit" value="chercher" />
+        </form>
+        {% if keyword_results or results %}
+            <p>Vous avez cherché "{{ query }}".</p>
+
+            {% if keyword_results %}
+                <p>Pages recommandées:</p>
+                <ul>
+                    {% for page in keyword_results %}
+                    <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if results %}
+                <p>Résultat de la recherche:</p>
+                <ul>
+                {% for page in results %}
+                <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+        {% endif %}
+
+        {% if query and not keyword_results and not results %}
+            <p>Pas de résultat trouvés.</p>
+        {% else %}
+            <p>Entrez un mot à rechercher dans le champ de recherche, puis cliquez sur
+            le bouton "chercher"</p>
+        {% endif %}
     </body>
 </html>

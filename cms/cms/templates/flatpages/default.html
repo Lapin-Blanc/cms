@@ -5,8 +5,9 @@
     </head>
     <body>
     <form method="get" action="/search/" style="float:right">
-    <input type="text" name="q" id="q_id" />
-    <input type="submit" value="rechercher" />
+        <label for="id_q">Rechercher</label>
+        <input type="text" name="q" id="id_q" value="{{ query }}"/>
+        <input type="submit" value="chercher" />
     </form>
     <h1>{{ flatpage.title }}</h1>
     {{ flatpage.content }}
