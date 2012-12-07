@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.flatpages',
     'search',
+    'coltrane',
 )
 
 # A sample logging configuration. The only tangible logging
